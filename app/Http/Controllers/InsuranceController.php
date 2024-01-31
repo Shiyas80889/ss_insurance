@@ -1,0 +1,142 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\insurance;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class InsuranceController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $insurance = insurance::all();
+        return view('insurance',['insurance'=>$insurance]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+       
+
+        return view('create-insurance');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+    
+        // $validatedData = $request->validate([
+        //         'customer_name'=> 'required',
+        //         'reg_no'=> 'required',
+        //         'company_id '=> 'required',
+        //         'make'=> 'required',
+        //         'model'=> 'required',
+        //         'fuel'=> 'required',
+        //         'seating'=> 'required',
+        //         'gvm_or_cc'=> 'required',
+        //         'manufacturing_year'=> 'required',
+        //         'segment_id'=> 'required',
+        //         'coverage_id'=> 'required',
+        //         'od'=> 'required',
+        //         'tp'=> 'required',
+        //         'net_premium'=> 'required',
+        //         'gst'=> 'required',
+        //         'final_premium'=> 'required',
+        //         'payment_status'=> 'required',
+        //         'collected_prm'=> 'required',
+        //         'policy_number'=> 'required',
+        //         'risk_start_date'=> 'required',
+        //         'ref_name_id'=> 'required',
+        //         'mobile_number'=> 'required',
+        //         'issued_by_id'=> 'required',
+        //         'issued_code'=> 'required',
+        //         'email'=> 'required',
+        //         'payment_mode_id'=> 'required'
+        //     ]);
+        if($request->insurance_id){
+        //     $update['name'] = $request->tag_type_name;
+        //     $update['code'] = $request->code;
+        //    // $update['created_by'] = Auth::user()->id;
+        //    / /$tagsUpdate = TagTypes::find($request->tag_type_id);
+        //     $tags = $tagsUpdate->update($update);
+        }
+        else{
+          //  dd($request);
+            $Createdinsurance =  insurance::create([
+                'customer_name' =>  $request->customer_name,
+                'reg_no' =>  $request->reg_no,
+                'company_id' =>  $request->company_id ,
+                'make' =>  $request->make,
+                'model' =>  $request->model,
+                'fuel' =>  $request->fuel,
+                'seating' =>  $request->seating,
+                'gvm_or_cc' =>  $request->gvm_or_cc,
+                'manufacturing_year' =>  $request->manufacturing_year,
+                'segment_id' =>  $request->segment_id,
+                'coverage_id' =>  $request->coverage_id,
+                'od' =>  $request->od,
+                'tp' =>  $request->tp,
+                'net_premium' =>  $request->net_premium,
+                'gst' =>  $request->gst,
+                'final_premium' =>  $request->final_premium,
+                'payment_status' =>  $request->payment_status,
+                'collected_prm' =>  $request->collected_prm,
+                'policy_number' =>  $request->policy_number,
+                'risk_start_date' =>  $request->risk_start_date,
+                'ref_name_id' =>  $request->ref_name_id,
+                'mobile_number' =>  $request->mobile_number,
+                'issued_by_id' =>  $request->issued_by_id,
+                'issued_code' =>  $request->issued_code,
+                'email' =>  $request->email,
+                'payment_mode_id' =>  $request->payment_mode_id,
+             ]);
+        }
+
+
+        if($Createdinsurance){
+            return redirect()->route('insurance');
+        }else{
+            return response()->json(['error' => 'Failed']);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(insurance $insurance)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(insurance $insurance)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, insurance $insurance)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(insurance $insurance)
+    {
+        //
+    }
+}
