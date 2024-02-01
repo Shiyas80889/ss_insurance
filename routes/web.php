@@ -19,4 +19,5 @@ Route::get('insurance', [App\Http\Controllers\InsuranceController::class,'index'
 Route::get('create-insurance', [App\Http\Controllers\InsuranceController::class,'create'])->name('create-insurance');
 Route::post('login', [App\Http\Controllers\LoginController::class,'login'])->name('login');;
 Route::post('submit-insurance', [App\Http\Controllers\InsuranceController::class,'store'])->name('submit-insurance');
+Route::get('/edit-insurance/{id}', [App\Http\Controllers\InsuranceController::class,'edit'])->name('edit-insurance');
 

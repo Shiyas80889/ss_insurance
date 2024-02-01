@@ -22,9 +22,9 @@ class InsuranceController extends Controller
      */
     public function create()
     {
-       
+        $insurance = [];
 
-        return view('create-insurance');
+        return view('create-insurance',['insurance'=>$insurance]);
     }
 
     /**
@@ -62,15 +62,47 @@ class InsuranceController extends Controller
         //         'payment_mode_id'=> 'required'
         //     ]);
         if($request->insurance_id){
+            
         //     $update['name'] = $request->tag_type_name;
         //     $update['code'] = $request->code;
         //    // $update['created_by'] = Auth::user()->id;
-        //    / /$tagsUpdate = TagTypes::find($request->tag_type_id);
+        //    //$tagsUpdate = TagTypes::find($request->tag_type_id);
         //     $tags = $tagsUpdate->update($update);
+
+            $update['customer_name'] =  $request->customer_name;
+            $update['reg_no'] =  $request->reg_no;
+            $update['company_id'] =  $request->company_id ;
+            $update['make'] =  $request->make;
+            $update['model'] =  $request->model;
+            $update['fuel'] =  $request->fuel;
+            $update['seating'] =  $request->seating;
+            $update['gvm_or_cc'] =  $request->gvm_or_cc;
+            $update['manufacturing_year'] =  $request->manufacturing_year;
+            $update['segment_id'] =  $request->segment_id;
+            $update['coverage_id'] =  $request->coverage_id;
+            $update['od'] =  $request->od;
+            $update['tp'] =  $request->tp;
+            $update['net_premium'] =  $request->net_premium;
+            $update['gst'] =  $request->gst;
+            $update['final_premium'] =  $request->final_premium;
+            $update['payment_status'] =  $request->payment_status;
+            $update['collected_prm'] =  $request->collected_prm;
+            $update['policy_number'] =  $request->policy_number;
+            $update['risk_start_date'] =  $request->risk_start_date;
+            $update['ref_name_id'] =  $request->ref_name_id;
+            $update['mobile_number'] =  $request->mobile_number;
+            $update['issued_by_id'] =  $request->issued_by_id;
+            $update['issued_code'] =  $request->issued_code;
+            $update['email'] =  $request->email;
+            $update['payment_mode_id'] =  $request->payment_mode_id;
+
+            $insuranceUpdate = insurance::find($request->insurance_id);
+            $insurance = $insuranceUpdate->update($update);
+
         }
         else{
           //  dd($request);
-            $Createdinsurance =  insurance::create([
+            $insurance =  insurance::create([
                 'customer_name' =>  $request->customer_name,
                 'reg_no' =>  $request->reg_no,
                 'company_id' =>  $request->company_id ,
@@ -101,7 +133,7 @@ class InsuranceController extends Controller
         }
 
 
-        if($Createdinsurance){
+        if($insurance){
             return redirect()->route('insurance');
         }else{
             return response()->json(['error' => 'Failed']);
@@ -119,9 +151,10 @@ class InsuranceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(insurance $insurance)
+    public function edit($id)
     {
-        //
+        $insurance = insurance::find($id);
+        return view('create-insurance',['insurance' => $insurance]);
     }
 
     /**

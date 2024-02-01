@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('policy_number');
             $table->dateTime('risk_start_date');
             $table->string('ref_name_id');
-            $table->integer('mobile_number');
+            $table->string('mobile_number');
             $table->string('issued_by_id');
             $table->string('issued_code');
             $table->string('email');

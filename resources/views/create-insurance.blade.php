@@ -45,7 +45,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
         <img src="{{ URL::asset('assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+        <span class="ms-1 font-weight-bold text-white">SS Insurance</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -129,10 +129,10 @@
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
+      {{-- <div class="mx-3">
         <a class="btn btn-outline-primary mt-4 w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree" type="button">Documentation</a>
         <a class="btn bg-gradient-primary w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-      </div>
+      </div> --}}
     </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -157,7 +157,14 @@
 
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div style="display:flex;" class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <div style="width:88%" ><h6 class="text-white text-capitalize ps-3">Create Insurance Data</h6></div>
+                <div style="width:88%" >
+                  @if ($insurance != null)
+                  <h6 class="text-white text-capitalize ps-3">Update Insurance Data</h6>
+    @else
+    <h6 class="text-white text-capitalize ps-3">Create Insurance Data</h6>
+    @endif
+                  
+                </div>
 
                 {{-- <div style="border: 1px solid;border-radius: 10px;" class="text-white text-capitalize ps-3"><a class="btn  btn-sm mb-0 me-3" target="_blank" href="{{ route('create-insurance') }}">Add New</a></div> --}}
               </div>
@@ -170,9 +177,9 @@
                 @csrf
     <div class="row">
        <div class="col-md-12">
-       <div class="input-group input-group-outline my-3">
+       <div class="input-group input-group-outline my-3 focused is-focused" >
         <label class="form-label">Customer Name</label>
-        <input name="customer_name" type="text" class="form-control">
+        <input placeholder="Customer Name" @if ($insurance != null) value="{{$insurance['customer_name']}}" @endif name="customer_name" type="text" class="form-control">
         @error('customer_name')
                                     <p class="text-red-500">{{ $message }}</p>
                                     @enderror
@@ -185,7 +192,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">Make</label>
-        <input name="make" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['make']}}" @endif  name="make" type="text" class="form-control">
         @error('make')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -195,7 +202,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">Reg No</label>
-        <input name="reg_no" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['reg_no']}}" @endif  name="reg_no" type="text" class="form-control">
         @error('reg_no')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -206,13 +213,13 @@
   <div class="row">
     <div class="col-md-12">
   <div class="input-group input-group-outline my-3">
-    <select name="company_id" class="form-control" id="exampleFormControlSelect1">
+    <select  name="company_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a company</option>
-      <option value="1" >Honda</option>
-      <option value="2" >Tata</option>
-      <option value="3" >Skoda</option>
-      <option value="4" >Vokswagen</option>
-      <option value="5" >MG</option>
+      <option value="Honda" >Honda</option>
+      <option value="Tata" >Tata</option>
+      <option value="Skoda" >Skoda</option>
+      <option value="Vokswagen" >Vokswagen</option>
+      <option value="MG" >MG</option>
     </select>
     @error('company_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -226,7 +233,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">Model</label>
-        <input name="model" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['model']}}" @endif  name="model" type="text" class="form-control">
         @error('model')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -236,7 +243,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">Fuel</label>
-        <input name="fuel" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['fuel']}}" @endif  name="fuel" type="text" class="form-control">
         @error('fuel')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -249,7 +256,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">Seating</label>
-        <input name="seating" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['seating']}}" @endif  name="seating" type="text" class="form-control">
         @error('seating')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -259,7 +266,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">GVW/CC</label>
-        <input name="gvm_or_cc" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['gvm_or_cc']}}" @endif  name="gvm_or_cc" type="text" class="form-control">
         @error('gvm_or_cc')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -272,7 +279,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">Manufacturing Year</label>
-        <input name="manufacturing_year" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['manufacturing_year']}}" @endif  name="manufacturing_year" type="text" class="form-control">
         @error('manufacturing_year')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -282,7 +289,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">OD</label>
-        <input name="od" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['od']}}" @endif  name="od" type="text" class="form-control">
         @error('od')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -311,9 +318,9 @@
   <div class="input-group input-group-outline my-3">
     <select name="coverage_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a Coverage</option>
-      <option value="1" >Full covergae</option>
-      <option value="2" >Third Party</option>
-      <option value="3" >Bumber to bumber</option>
+      <option value="Full covergae" >Full covergae</option>
+      <option value="Third Party" >Third Party</option>
+      <option value="Bumber to bumber" >Bumber to bumber</option>
     </select>
     @error('coverage_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -327,7 +334,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">Net Premium</label>
-        <input name="net_premium" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['net_premium']}}" @endif  name="net_premium" type="text" class="form-control">
         @error('net_premium')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -337,7 +344,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">TP</label>
-        <input name="tp" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['tp']}}" @endif  name="tp" type="text" class="form-control">
         @error('tp')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -350,7 +357,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">GST</label>
-        <input name="gst" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['gst']}}" @endif  name="gst" type="text" class="form-control">
         @error('gst')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -360,7 +367,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">Final Premium</label>
-        <input name="final_premium" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['final_premium']}}" @endif  name="final_premium" type="text" class="form-control">
         @error('final_premium')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -373,7 +380,7 @@
     <div class="col-md-6">
       <div class="input-group input-group-outline my-3">
         <label class="form-label">Payment Status</label>
-        <input name="payment_status" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['payment_status']}}" @endif  name="payment_status" type="text" class="form-control">
         @error('payment_status')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -383,7 +390,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
         <label class="form-label">Collected Prm</label>
-        <input name="collected_prm" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['collected_prm']}}" @endif  name="collected_prm" type="text" class="form-control">
         @error('collected_prm')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -396,7 +403,7 @@
     <div class="col-md-6">
     <div class="input-group input-group-outline my-3">
      <label class="form-label">Policy Number</label>
-     <input name="policy_number" type="text" class="form-control">
+     <input  @if ($insurance != null) value="{{$insurance['policy_number']}}" @endif  name="policy_number" type="text" class="form-control">
      @error('policy_number')
      <p class="text-red-500">{{ $message }}</p>
      @enderror
@@ -410,7 +417,7 @@
         <label for="exampleFormControlSelect1" class="ms-0">Risk Start Date</label>
         </div>
         <div class="col-md-9">
-        <input name="risk_start_date" type="date" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['risk_start_date']}}" @endif  name="risk_start_date" type="date" class="form-control">
         @error('risk_start_date')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
@@ -441,7 +448,7 @@
   <div class="col-md-6">
   <div class="input-group input-group-outline my-3">
    <label class="form-label">Mobile Number</label>
-   <input name="mobile_number" type="phone" class="form-control">
+   <input  @if ($insurance != null) value="{{$insurance['mobile_number']}}" @endif  name="mobile_number" type="phone" class="form-control">
    @error('mobile_number')
    <p class="text-red-500">{{ $message }}</p>
    @enderror
@@ -467,7 +474,7 @@
   <div class="col-md-6">
   <div class="input-group input-group-outline my-3">
    <label class="form-label">Issued Code</label>
-   <input name="issued_code" type="text" class="form-control">
+   <input  @if ($insurance != null) value="{{$insurance['issued_code']}}" @endif  name="issued_code" type="text" class="form-control">
    @error('issued_code')
    <p class="text-red-500">{{ $message }}</p>
    @enderror
@@ -493,7 +500,7 @@
   <div class="col-md-12">
   <div class="input-group input-group-outline my-3">
    <label class="form-label">Email address</label>
-   <input name="email" type="text" class="form-control">
+   <input  @if ($insurance != null) value="{{$insurance['email']}}" @endif  name="email" type="text" class="form-control">
    @error('email')
    <p class="text-red-500">{{ $message }}</p>
    @enderror
@@ -501,10 +508,18 @@
  </div>
  </div>
 </div>
+@if ($insurance != null)
+<input type="hidden" value="{{$insurance['id']}}" name="insurance_id" class="form-control" >
+@endif
 <br/>
     <div class="row">
       <div style="text-align: end;"  class="col-md-7">
+    
+    @if ($insurance != null)
+    <button style="width: 20%;"   type="submit" class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" >Update</button>
+    @else
     <button style="width: 20%;"   type="submit" class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" >Submit</button>
+    @endif
       </div>
     </div>
 
@@ -702,7 +717,7 @@
        
         </div>
       </div>
-      <footer class="footer py-4  ">
+      {{-- <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
@@ -733,10 +748,10 @@
             </div>
           </div>
         </div>
-      </footer>
+      </footer> --}}
     </div>
   </main>
-  <div class="fixed-plugin">
+  {{-- <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
       <i class="material-icons py-2">settings</i>
     </a>
@@ -809,7 +824,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
   <!--   Core JS Files   -->
   <script src="{{ URL::asset('assets/js/core/popper.min.js') }}"></script>
   <script src="{{ URL::asset('assets/js/core/bootstrap.min.js') }}"></script>
