@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () { return view('sign-in'); });
+Route::get('sign-in', function () { return view('sign-in'); })->name('sign-in');
 Route::get('dashboard', [App\Http\Controllers\LoginController::class,'index'])->name('dashboard');
 Route::get('insurance', [App\Http\Controllers\InsuranceController::class,'index'])->name('insurance');
 Route::get('create-insurance', [App\Http\Controllers\InsuranceController::class,'create'])->name('create-insurance');
