@@ -32,7 +32,7 @@ return new class extends Migration
             $table->enum('payment_status', ['credit', 'paid']);
             $table->string('collected_prm');
             $table->string('policy_number');
-            $table->dateTime('risk_start_date');
+            $table->date('risk_start_date');
             $table->string('ref_name_id');
             $table->string('mobile_number');
             $table->string('issued_by_id');

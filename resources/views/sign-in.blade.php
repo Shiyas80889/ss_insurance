@@ -128,15 +128,22 @@
                 </div>
               </div> -->
               <div class="card-body">
-                <form action="{{ route('login') }}" method="POST" role="form" class="text-start">
+                <form action="{{ route('login') }}" enctype="multipart/form-data" method="POST" role="form" class="text-start">
                   @csrf
-                  <div class="input-group input-group-outline my-3">
+                  <div class="input-group input-group-outline my-3 ">
                     <label class="form-label">User Name</label>
                     <input name="name" type="text" class="form-control">
+                    @error('name')
+        <p style="color: red">{{ $message }}</p>
+    @enderror
+                    <div class="clearfix"></div>
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
                     <input name="password" type="password" class="form-control">
+                    @error('password')
+                    <p style="color: red">{{ $message }}</p>
+                @enderror
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked>

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('referances', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->enum('status', ['enable', 'disable'])->default('enable');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('referances');
     }
 };

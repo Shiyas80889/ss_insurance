@@ -177,9 +177,9 @@
                 @csrf
     <div class="row">
        <div class="col-md-12">
-       <div class="input-group input-group-outline my-3 focused is-focused" >
+       <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Customer Name</label>
-        <input placeholder="Customer Name" @if ($insurance != null) value="{{$insurance['customer_name']}}" @endif name="customer_name" type="text" class="form-control">
+        <input  @if ($insurance != null) value="{{$insurance['customer_name']}}" @endif name="customer_name" type="text" class="form-control">
         @error('customer_name')
                                     <p class="text-red-500">{{ $message }}</p>
                                     @enderror
@@ -190,7 +190,7 @@
                 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Make</label>
         <input  @if ($insurance != null) value="{{$insurance['make']}}" @endif  name="make" type="text" class="form-control">
         @error('make')
@@ -200,7 +200,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Reg No</label>
         <input  @if ($insurance != null) value="{{$insurance['reg_no']}}" @endif  name="reg_no" type="text" class="form-control">
         @error('reg_no')
@@ -212,14 +212,18 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-  <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
     <select  name="company_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a company</option>
+      @foreach ($company as $item => $val)
+      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['company_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="" >Select a company</option>
       <option value="Honda" >Honda</option>
       <option value="Tata" >Tata</option>
       <option value="Skoda" >Skoda</option>
       <option value="Vokswagen" >Vokswagen</option>
-      <option value="MG" >MG</option>
+      <option value="MG" >MG</option> --}}
     </select>
     @error('company_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -231,7 +235,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Model</label>
         <input  @if ($insurance != null) value="{{$insurance['model']}}" @endif  name="model" type="text" class="form-control">
         @error('model')
@@ -241,7 +245,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Fuel</label>
         <input  @if ($insurance != null) value="{{$insurance['fuel']}}" @endif  name="fuel" type="text" class="form-control">
         @error('fuel')
@@ -254,7 +258,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Seating</label>
         <input  @if ($insurance != null) value="{{$insurance['seating']}}" @endif  name="seating" type="text" class="form-control">
         @error('seating')
@@ -264,7 +268,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">GVW/CC</label>
         <input  @if ($insurance != null) value="{{$insurance['gvm_or_cc']}}" @endif  name="gvm_or_cc" type="text" class="form-control">
         @error('gvm_or_cc')
@@ -277,7 +281,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Manufacturing Year</label>
         <input  @if ($insurance != null) value="{{$insurance['manufacturing_year']}}" @endif  name="manufacturing_year" type="text" class="form-control">
         @error('manufacturing_year')
@@ -287,7 +291,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">OD</label>
         <input  @if ($insurance != null) value="{{$insurance['od']}}" @endif  name="od" type="text" class="form-control">
         @error('od')
@@ -299,13 +303,16 @@
   </div>
   <div class="row">
   <div class="col-md-6">
-  <div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
     <select name="segment_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a Segment</option>
-      <option value="1" >Hatch back</option>
+      @foreach ($segment as $item => $val)
+      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['segment_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="1" >Hatch back</option>
       <option value="2" >SUV</option>
       <option value="3" >Sedan</option>
-      <option value="4" >Adventure</option>
+      <option value="4" >Adventure</option> --}}
     </select>
     @error('segment_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -315,12 +322,15 @@
     </div>
   
   <div class="col-md-6">
-  <div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
     <select name="coverage_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a Coverage</option>
-      <option value="Full covergae" >Full covergae</option>
+      @foreach ($coverage as $item => $val)
+      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['coverage_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="Full covergae" >Full covergae</option>
       <option value="Third Party" >Third Party</option>
-      <option value="Bumber to bumber" >Bumber to bumber</option>
+      <option value="Bumber to bumber" >Bumber to bumber</option> --}}
     </select>
     @error('coverage_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -332,7 +342,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Net Premium</label>
         <input  @if ($insurance != null) value="{{$insurance['net_premium']}}" @endif  name="net_premium" type="text" class="form-control">
         @error('net_premium')
@@ -342,7 +352,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">TP</label>
         <input  @if ($insurance != null) value="{{$insurance['tp']}}" @endif  name="tp" type="text" class="form-control">
         @error('tp')
@@ -355,7 +365,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">GST</label>
         <input  @if ($insurance != null) value="{{$insurance['gst']}}" @endif  name="gst" type="text" class="form-control">
         @error('gst')
@@ -365,7 +375,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Final Premium</label>
         <input  @if ($insurance != null) value="{{$insurance['final_premium']}}" @endif  name="final_premium" type="text" class="form-control">
         @error('final_premium')
@@ -378,7 +388,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Payment Status</label>
         <input  @if ($insurance != null) value="{{$insurance['payment_status']}}" @endif  name="payment_status" type="text" class="form-control">
         @error('payment_status')
@@ -388,7 +398,7 @@
       </div>
     </div>
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Collected Prm</label>
         <input  @if ($insurance != null) value="{{$insurance['collected_prm']}}" @endif  name="collected_prm" type="text" class="form-control">
         @error('collected_prm')
@@ -401,7 +411,7 @@
 
   <div class="row">
     <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
      <label class="form-label">Policy Number</label>
      <input  @if ($insurance != null) value="{{$insurance['policy_number']}}" @endif  name="policy_number" type="text" class="form-control">
      @error('policy_number')
@@ -411,7 +421,7 @@
    </div>
    </div>
    <div class="col-md-6">
-    <div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         
         <div class="col-md-3">
         <label for="exampleFormControlSelect1" class="ms-0">Risk Start Date</label>
@@ -429,12 +439,15 @@
 
  <div class="row">
   <div class="col-md-12">
-<div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
   <select name="ref_name_id" class="form-control" id="exampleFormControlSelect1">
     <option value="" >Referance Name</option>
-    <option value="1" >Freddy</option>
+    @foreach ($referance as $item => $val)
+    <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['ref_name_id']) selected @endif>{{$val->name}}</option>
+    @endforeach
+    {{-- <option value="1" >Freddy</option>
     <option value="2" >Cristy</option>
-    <option value="3" >Gladice</option>
+    <option value="3" >Gladice</option> --}}
   </select>
   @error('ref_name_id')
   <p class="text-red-500">{{ $message }}</p>
@@ -446,7 +459,7 @@
 
 <div class="row">
   <div class="col-md-6">
-  <div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
    <label class="form-label">Mobile Number</label>
    <input  @if ($insurance != null) value="{{$insurance['mobile_number']}}" @endif  name="mobile_number" type="phone" class="form-control">
    @error('mobile_number')
@@ -456,12 +469,15 @@
  </div>
  </div>
  <div class="col-md-6">
-  <div class="input-group input-group-outline my-3">
+  <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
     <select name="issued_by_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Issued By</option>
-      <option value="1" >Freddy</option>
+      @foreach ($issuer as $item => $val)
+      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['issued_by_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="1" >Freddy</option>
       <option value="2" >Cristy</option>
-      <option value="3" >Gladice</option>
+      <option value="3" >Gladice</option> --}}
     </select>
     @error('issued_by_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -472,7 +488,7 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-  <div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
    <label class="form-label">Issued Code</label>
    <input  @if ($insurance != null) value="{{$insurance['issued_code']}}" @endif  name="issued_code" type="text" class="form-control">
    @error('issued_code')
@@ -482,11 +498,14 @@
  </div>
  </div>
  <div class="col-md-6">
-  <div class="input-group input-group-outline my-3">
+  <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
     <select name="payment_mode_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Payment Mode</option>
-      <option value="1" >Cash</option>
-      <option value="2" >Card</option>
+      @foreach ($paymentmode as $item => $val)
+      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['payment_mode_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="1" >Cash</option>
+      <option value="2" >Card</option> --}}
     </select>
     @error('payment_mode_id')
     <p class="text-red-500">{{ $message }}</p>
@@ -498,7 +517,7 @@
 
 <div class="row">
   <div class="col-md-12">
-  <div class="input-group input-group-outline my-3">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
    <label class="form-label">Email address</label>
    <input  @if ($insurance != null) value="{{$insurance['email']}}" @endif  name="email" type="text" class="form-control">
    @error('email')

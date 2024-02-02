@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\insurance;
+use App\Models\company;
+use App\Models\coverage;
+use App\Models\issuer;
+use App\Models\referance;
+use App\Models\paymentmode;
+use App\Models\segment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,6 +20,7 @@ class InsuranceController extends Controller
     public function index()
     {
         $insurance = insurance::all();
+
         return view('insurance',['insurance'=>$insurance]);
     }
 
@@ -23,8 +30,14 @@ class InsuranceController extends Controller
     public function create()
     {
         $insurance = [];
+        $company = company::all();
+        $coverage = coverage::all();
+        $issuer = issuer::all();
+        $referance = referance::all();
+        $segment = segment::all();
+        $paymentmode = paymentmode::all();
 
-        return view('create-insurance',['insurance'=>$insurance]);
+        return view('create-insurance',['insurance'=>$insurance,'company'=>$company,'coverage'=>$coverage,'issuer'=>$issuer,'referance'=>$referance,'segment'=>$segment,'paymentmode'=>$paymentmode]);
     }
 
     /**
@@ -154,7 +167,13 @@ class InsuranceController extends Controller
     public function edit($id)
     {
         $insurance = insurance::find($id);
-        return view('create-insurance',['insurance' => $insurance]);
+        $company = company::all();
+        $coverage = coverage::all();
+        $issuer = issuer::all();
+        $referance = referance::all();
+        $segment = segment::all();
+        $paymentmode = paymentmode::all();
+        return view('create-insurance',['insurance' => $insurance,'company' => $company,'coverage'=>$coverage,'issuer'=>$issuer,'referance'=>$referance,'segment'=>$segment,'paymentmode'=>$paymentmode]);
     }
 
     /**
