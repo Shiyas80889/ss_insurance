@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
 class LoginController extends Controller
 {
     
@@ -44,6 +45,14 @@ class LoginController extends Controller
 
 
     } 
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return view('sign-in');
+    }
 
     /**
      * Display a listing of the resource.

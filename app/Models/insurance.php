@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Company;
+use App\Models\coverage;
+use App\Models\issuer;
+use App\Models\segment;
 
 class insurance extends Model
 {
@@ -36,4 +40,26 @@ class insurance extends Model
         'email',
         'payment_mode_id',
     ];
+
+
+public function companies()
+{
+    return $this->belongsTo(Company::class, 'company_id');
+}
+
+public function coverages()
+{
+    return $this->belongsTo(coverage::class, 'coverage_id');
+}
+
+public function issuers()
+{
+    return $this->belongsTo(issuer::class, 'issued_by_id');
+}
+
+public function segments()
+{
+    return $this->belongsTo(segment::class, 'segment_id');
+}
+
 }

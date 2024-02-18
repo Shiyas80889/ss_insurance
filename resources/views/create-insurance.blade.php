@@ -16,6 +16,12 @@
 <html lang="en">
 
 <head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css" rel="stylesheet">
+  <style>
+      .hidden {
+          display: none;
+      }
+  </style>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ URL::asset('assets/img/apple-icon.png') }}">
@@ -126,6 +132,14 @@
             <span class="nav-link-text ms-1">Sign Up</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="{{ route('logout') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Log out</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
@@ -154,6 +168,15 @@
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
+            {{-- <button id="uploadButton">Excel Upload</button> --}}
+            {{-- <div class="container hidden" id="uploadForm">
+                <form action="{{ route('upload.file') }}" method="post" enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+                    @csrf
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+                </form>
+            </div> --}}
 
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div style="display:flex;" class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
@@ -165,6 +188,10 @@
     @endif
                   
                 </div>
+                <div style="border: 1px solid;border-radius: 10px;" class="text-white text-capitalize ps-3">
+                  <button id="uploadButton" class="btn  btn-sm mb-0 me-3">Excel Upload</button>
+                  {{-- <a id="uploadButton" class="btn  btn-sm mb-0 me-3" target="_blank" href="{{ route('create-insurance') }}">Excel Upload</a> --}}
+                </div>
 
                 {{-- <div style="border: 1px solid;border-radius: 10px;" class="text-white text-capitalize ps-3"><a class="btn  btn-sm mb-0 me-3" target="_blank" href="{{ route('create-insurance') }}">Add New</a></div> --}}
               </div>
@@ -173,6 +200,15 @@
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <div style="margin:15px;" >
+                  <div class="container hidden" id="uploadForm">
+                    <form action="{{ route('upload.file') }}" method="post" enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+                        @csrf
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+                    </form>
+                </div>
+
               <form  action="{{ route('submit-insurance') }}" method="POST" >
                 @csrf
     <div class="row">
@@ -216,7 +252,7 @@
     <select  name="company_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a company</option>
       @foreach ($company as $item => $val)
-      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['company_id']) selected @endif>{{$val->name}}</option>
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['company_id']) selected @endif>{{$val->name}}</option>
       @endforeach
       {{-- <option value="" >Select a company</option>
       <option value="Honda" >Honda</option>
@@ -307,7 +343,7 @@
     <select name="segment_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a Segment</option>
       @foreach ($segment as $item => $val)
-      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['segment_id']) selected @endif>{{$val->name}}</option>
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['segment_id']) selected @endif>{{$val->name}}</option>
       @endforeach
       {{-- <option value="1" >Hatch back</option>
       <option value="2" >SUV</option>
@@ -326,7 +362,7 @@
     <select name="coverage_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a Coverage</option>
       @foreach ($coverage as $item => $val)
-      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['coverage_id']) selected @endif>{{$val->name}}</option>
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['coverage_id']) selected @endif>{{$val->name}}</option>
       @endforeach
       {{-- <option value="Full covergae" >Full covergae</option>
       <option value="Third Party" >Third Party</option>
@@ -443,7 +479,7 @@
   <select name="ref_name_id" class="form-control" id="exampleFormControlSelect1">
     <option value="" >Referance Name</option>
     @foreach ($referance as $item => $val)
-    <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['ref_name_id']) selected @endif>{{$val->name}}</option>
+    <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['ref_name_id']) selected @endif>{{$val->name}}</option>
     @endforeach
     {{-- <option value="1" >Freddy</option>
     <option value="2" >Cristy</option>
@@ -473,7 +509,7 @@
     <select name="issued_by_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Issued By</option>
       @foreach ($issuer as $item => $val)
-      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['issued_by_id']) selected @endif>{{$val->name}}</option>
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['issued_by_id']) selected @endif>{{$val->name}}</option>
       @endforeach
       {{-- <option value="1" >Freddy</option>
       <option value="2" >Cristy</option>
@@ -502,7 +538,7 @@
     <select name="payment_mode_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Payment Mode</option>
       @foreach ($paymentmode as $item => $val)
-      <option  value="{{$val->name}}" @if($insurance != null && $val->name == $insurance['payment_mode_id']) selected @endif>{{$val->name}}</option>
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['payment_mode_id']) selected @endif>{{$val->name}}</option>
       @endforeach
       {{-- <option value="1" >Cash</option>
       <option value="2" >Card</option> --}}
@@ -862,6 +898,25 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ URL::asset('assets/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+  <script>
+     document.getElementById('uploadButton').addEventListener('click', function() {
+    var uploadForm = document.getElementById('uploadForm');
+    if (uploadForm.classList.contains('hidden')) {
+        uploadForm.classList.remove('hidden');
+    } else {
+        uploadForm.classList.add('hidden');
+    }
+});
+
+      Dropzone.options.myDropzone = {
+          paramName: "file", // The name that will be used to transfer the file
+          maxFilesize: 2, // MB
+          acceptedFiles: ".xls,.xlsx",
+          dictDefaultMessage: "Drop files here or click to upload",
+      };
+  </script>
+
 </body>
 
 </html>

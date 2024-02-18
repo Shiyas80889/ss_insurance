@@ -11,6 +11,10 @@ use App\Models\paymentmode;
 use App\Models\segment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class InsuranceController extends Controller
 {
@@ -18,8 +22,9 @@ class InsuranceController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $insurance = insurance::all();
+    { 
+        //$insurance = insurance::all();
+        $insurance = insurance::with('companies')->with('coverages')->get();
 
         return view('insurance',['insurance'=>$insurance]);
     }

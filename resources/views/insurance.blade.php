@@ -68,7 +68,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/billing.html">
+          <a class="nav-link text-white " href="{{ route('company') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -124,6 +124,14 @@
               <i class="material-icons opacity-10">assignment</i>
             </div>
             <span class="nav-link-text ms-1">Sign Up</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="{{ route('logout') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Log out</span>
           </a>
         </li>
       </ul>
@@ -298,12 +306,12 @@
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">{{ $val->company_id}}</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $val->companies->name}}</p>
                         {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
                       </td>
                       
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ $val->coverage_id}}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $val->coverages->name}}</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{ $val->risk_start_date}}</span>

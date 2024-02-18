@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\company;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
@@ -13,7 +17,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $company = company::all();
+        return view('company',['company'=>$company]);
     }
 
     /**
@@ -29,7 +34,22 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+
+        $company =  company::create([
+            'name' =>  $request->name,
+            'status' =>  $request->status,
+         
+         ]);
+   if($company){
+       return redirect()->route('company');
+    }else{
+        return response()->json(['error' => 'Failed']);
+    }
     }
 
     /**
@@ -59,8 +79,10 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(company $company)
+    public function destroy($id)
     {
-        //
+        $record = company::findOrFail($id);
+        $record->delete();
+        return redirect()->back()->with('success', 'Company deleted successfully');
     }
 }
