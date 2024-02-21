@@ -113,6 +113,10 @@ class InsuranceController extends Controller
             $update['issued_code'] =  $request->issued_code;
             $update['email'] =  $request->email;
             $update['payment_mode_id'] =  $request->payment_mode_id;
+            $update['date'] =  $request->date;
+            $update['agent_commission'] =  $request->agent_commission;
+            $update['payment_given_to_account'] =  $request->payment_given_to_account;
+            $update['company_payout'] =  $request->company_payout;
 
             $insuranceUpdate = insurance::find($request->insurance_id);
             $insurance = $insuranceUpdate->update($update);
@@ -123,7 +127,7 @@ class InsuranceController extends Controller
             $insurance =  insurance::create([
                 'customer_name' =>  $request->customer_name,
                 'reg_no' =>  $request->reg_no,
-                'company_id' =>  $request->company_id ,
+                'company_id' =>  $request->company_id,
                 'make' =>  $request->make,
                 'model' =>  $request->model,
                 'fuel' =>  $request->fuel,
@@ -147,6 +151,10 @@ class InsuranceController extends Controller
                 'issued_code' =>  $request->issued_code,
                 'email' =>  $request->email,
                 'payment_mode_id' =>  $request->payment_mode_id,
+                'date' =>  $request->date,
+                'agent_commission' =>  $request->agent_commission,
+                'payment_given_to_account' =>  $request->payment_given_to_account,
+                'company_payout' =>  $request->company_payout,
              ]);
         }
 

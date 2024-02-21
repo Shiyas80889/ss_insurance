@@ -39,6 +39,10 @@ class insurance extends Model
         'issued_code',
         'email',
         'payment_mode_id',
+        'date',
+        'agent_commission',
+        'payment_given_to_account',
+        'company_payout'
     ];
 
 

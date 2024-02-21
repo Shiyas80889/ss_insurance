@@ -171,9 +171,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Company</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Payment mode</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Company</h6>
+          <h6 class="font-weight-bolder mb-0">Payment mode</h6>
         </nav>
         
       </div>
@@ -185,7 +185,7 @@
           <div style="height: 373%;" class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div style="display:flex;" class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <div style="width:88%" ><h6 class="text-white text-capitalize ps-3">Company</h6></div>
+                <div style="width:88%" ><h6 class="text-white text-capitalize ps-3">Payment mode</h6></div>
 
                 {{-- <div style="border: 1px solid;border-radius: 10px;" class="text-white text-capitalize ps-3"><a class="btn  btn-sm mb-0 me-3" target="_blank" href="{{ route('create-insurance') }}">Add New</a></div> --}}
               </div>
@@ -193,13 +193,13 @@
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <div style="margin:15px;" >
-                  <h4>Create Company</h4>
-                  <form  action="{{ route('submit-company') }}" method="POST" >
+                  <h4>Create Payment mode</h4>
+                  <form  action="{{ route('submit-paymentmode') }}" method="POST" >
                     @csrf
                     <div class="row">
                       <div class="col-md-6">
                         <div  class="input-group input-group-outline my-3" >
-                          <label class="form-label">Company Name</label>
+                          <label class="form-label">Payment mode Name</label>
                           <input   name="name" type="text" class="form-control">
                           @error('name')
                           <p style="color: red">{{ $message }}</p>
@@ -236,12 +236,12 @@
       </div>
     </div>
                   </form>
-                  <h4>List Company</h4>
+                  <h4>List Payment mode</h4>
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment mode Name</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
                      
                       
@@ -249,7 +249,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($company as $item => $val)
+                    @foreach ($paymentmode as $item => $val)
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -263,7 +263,6 @@
                           {{-- <div>
                             <img src="{{ URL::asset('assets/img/team-2.jpg') }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div> --}}
-                         
                           <div style="padding-left: 10px;" class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{ $val->name }}</h6>
                            
@@ -277,10 +276,10 @@
                       
                      
                       <td class="align-middle">
-                        <form method="POST" action="{{ route('delete-company', $val->id) }}">
+                        <form method="POST" action="{{ route('delete-paymentmode', $val->id) }}">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="badge badge-sm bg-gradient-success" data-toggle="tooltip" data-original-title="Delete Company" onclick="return confirm('Are you sure you want to delete this company?')">Delete</button>
+                          <button type="submit" class="badge badge-sm bg-gradient-success" data-toggle="tooltip" data-original-title="Delete Payment mode" onclick="return confirm('Are you sure you want to delete this paymentmode?')">Delete</button>
                       </form>
                         {{-- <button type="button" class="badge badge-sm bg-gradient-success" data-toggle="tooltip" data-original-title="Edit user" onclick="window.location.href='{{ route('edit-insurance', ['id' => $val->id]) }}';" > Delete</button> --}}
                         {{-- <a href="javascript:;" class="badge badge-sm bg-gradient-success" data-toggle="tooltip" data-original-title="Edit user">

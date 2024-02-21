@@ -45,6 +45,10 @@ return new class extends Migration
             $table->string('email');
             $table->unsignedBigInteger('payment_mode_id');
             $table->foreign('payment_mode_id')->references('id')->on('paymentmodes')->onDelete('restrict');
+            $table->date('date');
+            $table->string('agent_commission');
+            $table->string('payment_given_to_account');
+            $table->string('company_payout');
             $table->timestamps();
         });
     }

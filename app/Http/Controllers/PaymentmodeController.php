@@ -17,7 +17,8 @@ class PaymentmodeController extends Controller
      */
     public function index()
     {
-        //
+        $paymentmode = paymentmode::all();
+        return view('paymentmode',['paymentmode'=>$paymentmode]);
     }
 
     /**
@@ -33,7 +34,22 @@ class PaymentmodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+
+        $paymentmode =  paymentmode::create([
+            'name' =>  $request->name,
+            'status' =>  $request->status,
+         
+         ]);
+   if($paymentmode){
+       return redirect()->route('paymentmode');
+    }else{
+        return response()->json(['error' => 'Failed']);
+    }
     }
 
     /**
@@ -63,8 +79,10 @@ class PaymentmodeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(paymentmode $paymentmode)
+    public function destroy($id)
     {
-        //
+        $record = paymentmode::findOrFail($id);
+        $record->delete();
+        return redirect()->back()->with('success', 'Payment mode deleted successfully');
     }
 }

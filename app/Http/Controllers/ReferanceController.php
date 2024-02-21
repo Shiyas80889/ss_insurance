@@ -17,7 +17,8 @@ class ReferanceController extends Controller
      */
     public function index()
     {
-        //
+        $referance = referance::all();
+        return view('referance',['referance'=>$referance]);
     }
 
     /**
@@ -33,7 +34,22 @@ class ReferanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+
+        $referance =  referance::create([
+            'name' =>  $request->name,
+            'status' =>  $request->status,
+         
+         ]);
+   if($referance){
+       return redirect()->route('referance');
+    }else{
+        return response()->json(['error' => 'Failed']);
+    }
     }
 
     /**
@@ -63,8 +79,10 @@ class ReferanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(referance $referance)
+    public function destroy($id)
     {
-        //
+        $record = referance::findOrFail($id);
+        $record->delete();
+        return redirect()->back()->with('success', 'Referance deleted successfully');
     }
 }

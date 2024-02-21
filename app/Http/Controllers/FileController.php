@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use App\Models\insurance;
 
 class FileController extends Controller
 {
@@ -66,18 +67,46 @@ class FileController extends Controller
                 }
                 // Assuming the first column contains 'customer_name' and the second column contains 'reg_no'
                 $data[] = [
-                    'customer_name' => $rowData[0],
-                    'reg_no' => $rowData[1],
+                    'date' =>  $rowData[0],
+                    'customer_name' => $rowData[1],
+                    'reg_no' => $rowData[2],
+                    'company_id' =>  $rowData[3],
+                    'make' =>  $rowData[4],
+                    'model' =>  $rowData[5],
+                    'fuel' =>  $rowData[6],
+                    'seating' =>  $rowData[7],
+                    'gvm_or_cc' =>  $rowData[8],
+                    'manufacturing_year' =>  $rowData[9],
+                    'segment_id' =>  $rowData[10],
+                    'coverage_id' =>  $rowData[11],
+                    'od' =>  $rowData[12],
+                    'tp' =>  $rowData[13],
+                    'net_premium' =>  $rowData[14],
+                    'gst' =>  $rowData[15],
+                    'final_premium' =>  $rowData[16],
+                    'payment_status' =>  $rowData[17],
+                    'collected_prm' =>  $rowData[18],
+                    'policy_number' =>  $rowData[19],
+                    'risk_start_date' =>  $rowData[20],
+                    'ref_name_id' =>  $rowData[21],
+                    'mobile_number' =>  $rowData[22],
+                    'issued_by_id' =>  $rowData[23],
+                    'issued_code' =>  $rowData[24],
+                    'email' =>  $rowData[25],
+                    'payment_mode_id' =>  $rowData[26],
+                    'agent_commission' =>  $rowData[27],
+                    'payment_given_to_account' =>  $rowData[28],
+                    'company_payout' =>  $rowData[29],
                 ];
             }
 
             // Save data to database
             foreach ($data as $row) {
                 // Assuming you have a 'customers' table
-                Customer::create($row);
+                insurance::create($row);
             }
 
-            return redirect()->back()->with('success', 'Data imported successfully.');
+            return redirect()->route('insurance');
         }
 
         return redirect()->back()->with('error', 'No file uploaded.');

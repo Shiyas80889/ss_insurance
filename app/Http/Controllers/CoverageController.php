@@ -17,7 +17,8 @@ class CoverageController extends Controller
      */
     public function index()
     {
-        //
+        $coverage = coverage::all();
+        return view('coverage',['coverage'=>$coverage]);
     }
 
     /**
@@ -33,7 +34,22 @@ class CoverageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+
+        $coverage =  coverage::create([
+            'name' =>  $request->name,
+            'status' =>  $request->status,
+         
+         ]);
+   if($coverage){
+       return redirect()->route('coverage');
+    }else{
+        return response()->json(['error' => 'Failed']);
+    }
     }
 
     /**
@@ -63,8 +79,10 @@ class CoverageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(coverage $coverage)
+    public function destroy($id)
     {
-        //
+        $record = coverage::findOrFail($id);
+        $record->delete();
+        return redirect()->back()->with('success', 'Coverage deleted successfully');
     }
 }

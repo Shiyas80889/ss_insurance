@@ -211,74 +211,21 @@
 
               <form  action="{{ route('submit-insurance') }}" method="POST" >
                 @csrf
-                <div class="row">
-                    
-                   <div class="col-md-6">
-                    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-                        
-                        {{-- <div class="col-md-3">
-                        <label for="exampleFormControlSelect1" class="ms-0">Date</label>
-                        </div> --}}
-                        <div class="col-md-12">
-                        <input  @if ($insurance != null) value="{{$insurance['date']}}" @endif  name="date" type="date" class="form-control">
-                        @error('date')
-                        <p class="text-red-500">{{ $message }}</p>
-                        @enderror
-                        <div class="clearfix"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-                       <label class="form-label">Customer Name</label>
-                       <input  @if ($insurance != null) value="{{$insurance['customer_name']}}" @endif name="customer_name" type="text" class="form-control">
-                       @error('customer_name')
-                                                   <p class="text-red-500">{{ $message }}</p>
-                                                   @enderror
-                                                   <div class="clearfix"></div>
-                     </div>
-                     </div>
-                 </div>
-                {{-- <div class="row">
-                  
-                </div> --}}
-                <div class="row">
-                    <div class="col-md-12">
-                        <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-                          <label class="form-label">Reg No</label>
-                          <input  @if ($insurance != null) value="{{$insurance['reg_no']}}" @endif  name="reg_no" type="text" class="form-control">
-                          @error('reg_no')
-                          <p class="text-red-500">{{ $message }}</p>
-                          @enderror
-                          <div class="clearfix"></div>
-                        </div>
-                      </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-                    <select  name="company_id" class="form-control" id="exampleFormControlSelect1">
-                      <option value="" >Select a company</option>
-                      @foreach ($company as $item => $val)
-                      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['company_id']) selected @endif>{{$val->name}}</option>
-                      @endforeach
-                      {{-- <option value="" >Select a company</option>
-                      <option value="Honda" >Honda</option>
-                      <option value="Tata" >Tata</option>
-                      <option value="Skoda" >Skoda</option>
-                      <option value="Vokswagen" >Vokswagen</option>
-                      <option value="MG" >MG</option> --}}
-                    </select>
-                    @error('company_id')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
-                    <div class="clearfix"></div>
-                  </div>
-                    </div>
-                  </div>
+    <div class="row">
+       <div class="col-md-12">
+       <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+        <label class="form-label">Customer Name</label>
+        <input  @if ($insurance != null) value="{{$insurance['customer_name']}}" @endif name="customer_name" type="text" class="form-control">
+        @error('customer_name')
+                                    <p class="text-red-500">{{ $message }}</p>
+                                    @enderror
+                                    <div class="clearfix"></div>
+      </div>
+      </div>
+    </div>
                 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Make</label>
         <input  @if ($insurance != null) value="{{$insurance['make']}}" @endif  name="make" type="text" class="form-control">
@@ -288,9 +235,39 @@
         <div class="clearfix"></div>
       </div>
     </div>
-    
+    <div class="col-md-6">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+        <label class="form-label">Reg No</label>
+        <input  @if ($insurance != null) value="{{$insurance['reg_no']}}" @endif  name="reg_no" type="text" class="form-control">
+        @error('reg_no')
+        <p class="text-red-500">{{ $message }}</p>
+        @enderror
+        <div class="clearfix"></div>
+      </div>
+    </div>
   </div>
-  
+  <div class="row">
+    <div class="col-md-12">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+    <select  name="company_id" class="form-control" id="exampleFormControlSelect1">
+      <option value="" >Select a company</option>
+      @foreach ($company as $item => $val)
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['company_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="" >Select a company</option>
+      <option value="Honda" >Honda</option>
+      <option value="Tata" >Tata</option>
+      <option value="Skoda" >Skoda</option>
+      <option value="Vokswagen" >Vokswagen</option>
+      <option value="MG" >MG</option> --}}
+    </select>
+    @error('company_id')
+    <p class="text-red-500">{{ $message }}</p>
+    @enderror
+    <div class="clearfix"></div>
+  </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-6">
@@ -303,7 +280,7 @@
         <div class="clearfix"></div>
       </div>
     </div>
-    {{-- <div class="col-md-6">
+    <div class="col-md-6">
       <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Fuel</label>
         <input  @if ($insurance != null) value="{{$insurance['fuel']}}" @endif  name="fuel" type="text" class="form-control">
@@ -312,34 +289,7 @@
         @enderror
         <div class="clearfix"></div>
       </div>
-    </div> --}}
-    <div class="col-md-6">
-        <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-      <select  name="fuel" class="form-control" id="exampleFormControlSelect1">
-        @if ($insurance != null && $insurance['fuel']) 
-        <option value="{{$insurance['fuel'] }}" selected >{{$insurance['fuel']}}</option>
-        <option value="Petrol" @if ($insurance['fuel'] == 'Petrol') hidden @endif>Petrol</option>
-        <option value="Diesel" @if ($insurance['fuel'] == 'Diesel') hidden @endif>Diesel</option>
-        <option value="Electric" @if ($insurance['fuel'] == 'Electric') hidden @endif>Electric</option>
-        <option value="Lpg" @if ($insurance['fuel'] == 'Lpg') hidden @endif>Lpg</option>
-            @else
-        <option value="" >Select a Fuel</option>
-        {{-- @foreach ($company as $item => $val)
-        <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['company_id']) selected @endif>{{$val->name}}</option>
-        @endforeach --}}
-        {{-- <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['company_id']) selected @endif>{{$val->name}}</option> --}}
-        <option value="Petrol" >Petrol</option>
-        <option value="Diesel" >Diesel</option>
-        <option value="Electric" >Electric</option>
-        <option value="Lpg" >Lpg</option>
-        @endif
-          </select>
-      @error('company_id')
-      <p class="text-red-500">{{ $message }}</p>
-      @enderror
-      <div class="clearfix"></div>
     </div>
-      </div>
   </div>
 
   <div class="row">
@@ -377,27 +327,37 @@
       </div>
     </div>
     <div class="col-md-6">
-        <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-        <select name="segment_id" class="form-control" id="exampleFormControlSelect1">
-          <option value="" >Select a Segment</option>
-          @foreach ($segment as $item => $val)
-          <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['segment_id']) selected @endif>{{$val->name}}</option>
-          @endforeach
-          {{-- <option value="1" >Hatch back</option>
-          <option value="2" >SUV</option>
-          <option value="3" >Sedan</option>
-          <option value="4" >Adventure</option> --}}
-        </select>
-        @error('segment_id')
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+        <label class="form-label">OD</label>
+        <input  @if ($insurance != null) value="{{$insurance['od']}}" @endif  name="od" type="text" class="form-control">
+        @error('od')
         <p class="text-red-500">{{ $message }}</p>
         @enderror
         <div class="clearfix"></div>
       </div>
-        </div>
-    
+    </div>
   </div>
   <div class="row">
-   <div class="col-md-6">
+  <div class="col-md-6">
+    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+    <select name="segment_id" class="form-control" id="exampleFormControlSelect1">
+      <option value="" >Select a Segment</option>
+      @foreach ($segment as $item => $val)
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['segment_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="1" >Hatch back</option>
+      <option value="2" >SUV</option>
+      <option value="3" >Sedan</option>
+      <option value="4" >Adventure</option> --}}
+    </select>
+    @error('segment_id')
+    <p class="text-red-500">{{ $message }}</p>
+    @enderror
+    <div class="clearfix"></div>
+  </div>
+    </div>
+  
+  <div class="col-md-6">
     <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
     <select name="coverage_id" class="form-control" id="exampleFormControlSelect1">
       <option value="" >Select a Coverage</option>
@@ -414,29 +374,9 @@
     <div class="clearfix"></div>
   </div>
   </div>
-  <div class="col-md-6">
-    <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-      <label class="form-label">OD</label>
-      <input  @if ($insurance != null) value="{{$insurance['od']}}" @endif  name="od" type="text" class="form-control">
-      @error('od')
-      <p class="text-red-500">{{ $message }}</p>
-      @enderror
-      <div class="clearfix"></div>
-    </div>
-  </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
-        <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-          <label class="form-label">TP</label>
-          <input  @if ($insurance != null) value="{{$insurance['tp']}}" @endif  name="tp" type="text" class="form-control">
-          @error('tp')
-          <p class="text-red-500">{{ $message }}</p>
-          @enderror
-          <div class="clearfix"></div>
-        </div>
-      </div>
     <div class="col-md-6">
       <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
         <label class="form-label">Net Premium</label>
@@ -447,7 +387,16 @@
         <div class="clearfix"></div>
       </div>
     </div>
-    
+    <div class="col-md-6">
+      <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+        <label class="form-label">TP</label>
+        <input  @if ($insurance != null) value="{{$insurance['tp']}}" @endif  name="tp" type="text" class="form-control">
+        @error('tp')
+        <p class="text-red-500">{{ $message }}</p>
+        @enderror
+        <div class="clearfix"></div>
+      </div>
+    </div>
   </div>
 
   <div class="row">
@@ -585,6 +534,25 @@
  </div>
  </div>
  <div class="col-md-6">
+  <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
+    <select name="payment_mode_id" class="form-control" id="exampleFormControlSelect1">
+      <option value="" >Payment Mode</option>
+      @foreach ($paymentmode as $item => $val)
+      <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['payment_mode_id']) selected @endif>{{$val->name}}</option>
+      @endforeach
+      {{-- <option value="1" >Cash</option>
+      <option value="2" >Card</option> --}}
+    </select>
+    @error('payment_mode_id')
+    <p class="text-red-500">{{ $message }}</p>
+    @enderror
+    <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
     <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
    <label class="form-label">Email address</label>
    <input  @if ($insurance != null) value="{{$insurance['email']}}" @endif  name="email" type="text" class="form-control">
@@ -594,57 +562,6 @@
    <div class="clearfix"></div>
  </div>
  </div>
-
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-          <select name="payment_mode_id" class="form-control" id="exampleFormControlSelect1">
-            <option value="" >Select a Payment Mode</option>
-            @foreach ($paymentmode as $item => $val)
-            <option  value="{{$val->id}}" @if($insurance != null && $val->id == $insurance['payment_mode_id']) selected @endif>{{$val->name}}</option>
-            @endforeach
-            {{-- <option value="1" >Cash</option>
-            <option value="2" >Card</option> --}}
-          </select>
-          @error('payment_mode_id')
-          <p class="text-red-500">{{ $message }}</p>
-          @enderror
-          <div class="clearfix"></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-            <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-           <label class="form-label">Agent Commission</label>
-           <input  @if ($insurance != null) value="{{$insurance['agent_commission']}}" @endif  name="agent_commission" type="text" class="form-control">
-           @error('agent_commission')
-           <p class="text-red-500">{{ $message }}</p>
-           @enderror
-           <div class="clearfix"></div>
-         </div>
-         </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-       <label class="form-label">Payment Given To Account</label>
-       <input  @if ($insurance != null) value="{{$insurance['payment_given_to_account']}}" @endif  name="payment_given_to_account" type="text" class="form-control">
-       @error('payment_given_to_account')
-       <p class="text-red-500">{{ $message }}</p>
-       @enderror
-       <div class="clearfix"></div>
-     </div>
-     </div>
-        <div class="col-md-6">
-            <div @if ($insurance != null) class="input-group input-group-outline my-3 focused is-focused" @else class="input-group input-group-outline my-3" @endif>
-           <label class="form-label">Company Payout</label>
-           <input  @if ($insurance != null) value="{{$insurance['company_payout']}}" @endif  name="company_payout" type="text" class="form-control">
-           @error('company_payout')
-           <p class="text-red-500">{{ $message }}</p>
-           @enderror
-           <div class="clearfix"></div>
-         </div>
-         </div>
 </div>
 @if ($insurance != null)
 <input type="hidden" value="{{$insurance['id']}}" name="insurance_id" class="form-control" >

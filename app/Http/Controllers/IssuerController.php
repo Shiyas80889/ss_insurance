@@ -17,7 +17,8 @@ class IssuerController extends Controller
      */
     public function index()
     {
-        //
+        $issuer = issuer::all();
+        return view('issuer',['issuer'=>$issuer]);
     }
 
     /**
@@ -33,7 +34,22 @@ class IssuerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+
+        $issuer =  issuer::create([
+            'name' =>  $request->name,
+            'status' =>  $request->status,
+         
+         ]);
+   if($issuer){
+       return redirect()->route('issuer');
+    }else{
+        return response()->json(['error' => 'Failed']);
+    }
     }
 
     /**
@@ -63,8 +79,10 @@ class IssuerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(issuer $issuer)
+    public function destroy($id)
     {
-        //
+        $record = issuer::findOrFail($id);
+        $record->delete();
+        return redirect()->back()->with('success', 'Issuer deleted successfully');
     }
 }

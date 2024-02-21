@@ -17,7 +17,8 @@ class SegmentController extends Controller
      */
     public function index()
     {
-        //
+        $segment = segment::all();
+        return view('segment',['segment'=>$segment]);
     }
 
     /**
@@ -25,7 +26,7 @@ class SegmentController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,7 +34,22 @@ class SegmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+
+        $segment =  segment::create([
+            'name' =>  $request->name,
+            'status' =>  $request->status,
+         
+         ]);
+   if($segment){
+       return redirect()->route('segment');
+    }else{
+        return response()->json(['error' => 'Failed']);
+    }
     }
 
     /**
@@ -63,8 +79,10 @@ class SegmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(segment $segment)
+    public function destroy($id)
     {
-        //
+        $record = segment::findOrFail($id);
+        $record->delete();
+        return redirect()->back()->with('success', 'Company deleted successfully');
     }
 }
