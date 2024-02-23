@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreign('segment_id')->references('id')->on('segments')->onDelete('restrict');
             $table->unsignedBigInteger('coverage_id');
             $table->foreign('coverage_id')->references('id')->on('coverages')->onDelete('restrict');
-            $table->string('od');
+            $table->string('od')->default('null');
             $table->string('tp');
             $table->string('net_premium');
             $table->string('gst');
@@ -38,17 +38,17 @@ return new class extends Migration
             $table->date('risk_start_date');
             $table->unsignedBigInteger('ref_name_id');
             $table->foreign('ref_name_id')->references('id')->on('referances')->onDelete('restrict');
-            $table->string('mobile_number');
+            $table->string('mobile_number')->default('null');
             $table->unsignedBigInteger('issued_by_id');
             $table->foreign('issued_by_id')->references('id')->on('issuers')->onDelete('restrict');
             $table->string('issued_code');
-            $table->string('email');
+            $table->string('email')->default('null');
             $table->unsignedBigInteger('payment_mode_id');
             $table->foreign('payment_mode_id')->references('id')->on('paymentmodes')->onDelete('restrict');
             $table->date('date');
             $table->string('agent_commission');
             $table->string('payment_given_to_account');
-            $table->string('company_payout');
+            $table->string('company_payout')->default('null');
             $table->timestamps();
         });
     }
