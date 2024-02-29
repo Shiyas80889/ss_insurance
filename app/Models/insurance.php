@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Company;
+use App\Models\company;
 use App\Models\coverage;
 use App\Models\issuer;
 use App\Models\segment;

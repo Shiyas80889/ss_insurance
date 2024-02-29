@@ -243,8 +243,6 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Name</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                     
-                      
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
