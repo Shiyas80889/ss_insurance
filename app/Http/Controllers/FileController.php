@@ -48,6 +48,7 @@ class FileController extends Controller
 
     public function upload(Request $request)
     {
+        $rowNumber = 0;
         $request->validate([
             'file' => 'required|file|mimes:xlsx,xls',
         ]);
@@ -65,6 +66,11 @@ class FileController extends Controller
                 foreach ($row->getCellIterator() as $cell) {
                     $rowData[] = $cell->getValue();
                 }
+                if ($rowNumber == 0) {
+                    $rowNumber++;
+                    continue;
+                }
+          
                 $time = strtotime($rowData[0]);
                 $newformatDate = date('Y-m-d',$time);
 
@@ -105,8 +111,9 @@ class FileController extends Controller
                     'payment_given_to_account' =>  $rowData[28],
                     'company_payout' =>  $rowData[29],
                 ];
+                $rowNumber++;
             }
-//dd($data);
+
             // Save data to database
             foreach ($data as $row) {
                 // Assuming you have a 'customers' table
