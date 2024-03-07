@@ -65,9 +65,16 @@ class FileController extends Controller
                 foreach ($row->getCellIterator() as $cell) {
                     $rowData[] = $cell->getValue();
                 }
+                $time = strtotime($rowData[0]);
+                $newformatDate = date('Y-m-d',$time);
+
+                $otherTime = strtotime($rowData[20]);
+                $otherNewformatDate = date('Y-m-d',$otherTime);
+
+
                 // Assuming the first column contains 'customer_name' and the second column contains 'reg_no'
                 $data[] = [
-                    'date' =>  $rowData[0],
+                    'date' =>  $newformatDate,
                     'customer_name' => $rowData[1],
                     'reg_no' => $rowData[2],
                     'company_id' =>  $rowData[3],
@@ -87,7 +94,7 @@ class FileController extends Controller
                     'payment_status' =>  $rowData[17],
                     'collected_prm' =>  $rowData[18],
                     'policy_number' =>  $rowData[19],
-                    'risk_start_date' =>  $rowData[20],
+                    'risk_start_date' =>  $otherNewformatDate,
                     'ref_name_id' =>  $rowData[21],
                     'mobile_number' =>  $rowData[22],
                     'issued_by_id' =>  $rowData[23],
@@ -99,7 +106,7 @@ class FileController extends Controller
                     'company_payout' =>  $rowData[29],
                 ];
             }
-
+//dd($data);
             // Save data to database
             foreach ($data as $row) {
                 // Assuming you have a 'customers' table
